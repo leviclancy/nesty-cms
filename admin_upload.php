@@ -39,14 +39,33 @@ foreach((array)$files as $directory => $files_temp):
 
 		$photo_location = $photo = null;
 
+		echo "starting $file_name<br>";
+
 		$file_name_new = time($file_info['DateTime'])."_".random_code(10);
+
+		// check for duplicates and confirm whether to replace them or not, search for duplicates by matching datetime_original, filename_original
+		if (empty($check_image_statement)):		
+			$sql_temp = "SELECT * FROM $database.media WHERE `datetime_original`=:datetime_original AND `filename_original`=:filename_original";
+			$check_image_statement = $connection_pdo->prepare($sql_temp); endif;
+		$check_image_statement->execute(["datetime_original"=>$file_info['DateTime'], "filename_original"=>$file_name]);
+		$possible_duplicates = $check_image_statement->fetchAll();
+		foreach ($possible_duplicates as $row):
+			$file_name_new = $row['media_id']; 
+//			echo "skip $file_name<br>";
+//			echo "<img src='media/".$directory."/".$row['filename_thumb']."' alt='img' />";
+//			skip it for now .... will deal with duplicates later, needs interface to decide which ones to keep or to skip
+//			if (file_exists("originals/".$directory."/".$values['filename_original'])): unlink("originals/".$directory."/".$values['filename_original']); endif;
+			break;
+			endforeach;
+
+		// set up values
 		$values = [
 			"media_id"	=>	$file_name_new,
 			"directory"	=>	$directory,
 			"filename_original"	=>	$file_name,
 			"filename_full"		=>	$file_name_new."_full.jpg",
-			"filename_large"		=>	$file_name_new."_large.jpg",
-			"filename_thumb"		=>	$file_name_new."_thumb.jpg",
+			"filename_large"	=>	$file_name_new."_large.jpg",
+			"filename_thumb"	=>	$file_name_new."_thumb.jpg",
 			"datetime_original"	=>	$file_info['DateTime'],
 			"datetime_file"		=>	$file_info['FileDateTime'],
 			"datetime_process"	=>	date("Y-m-d h:i:s"),
@@ -56,26 +75,6 @@ foreach((array)$files as $directory => $files_temp):
 			"iso"			=>	$file_info['ISOSpeedRatings'],
 			"focallength"	=>	$file_info['FocalLength'] ];
 
-		echo "starting $file_name<br>";
-
-		// check for duplicates and confirm whether to replace them or not, search for duplicates by matching datetime_original, filename_original
-		if (empty($check_image_statement)):		
-			$sql_temp = "SELECT * FROM $database.media WHERE `datetime_original`=:datetime_original AND `filename_original`=:filename_original";
-			$check_image_statement = $connection_pdo->prepare($sql_temp); endif;
-		$check_image_statement->execute(["datetime_original"=>$values['datetime_original'], "filename_original"=>$values['filename_original']]);
-		$possible_duplicates = $check_image_statement->fetchAll();
-		foreach ($possible_duplicates as $row):
-		$values['media_id'] = $row['media_id'];
-    unlink("media/".$directory."/".$values['filename_thumb']);   
-    unlink("media/".$directory."/".$values['filename_large']);   
-    unlink("media/".$directory."/".$values['filename_full']);   
-
-//			echo "skip $file_name<br>";
-//			echo "<img src='media/".$directory."/".$row['filename_thumb']."' alt='img' />";
-//			skip it for now .... will deal with duplicates later, needs interface to decide which ones to keep or to skip
-//			if (file_exists("originals/".$directory."/".$values['filename_original'])): unlink("originals/".$directory."/".$values['filename_original']); endif;
-			continue 2;
-			endforeach;
 
 		// make image
 		$photo_location = "originals/".$directory."/".$values['filename_original'];
