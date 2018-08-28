@@ -129,11 +129,11 @@ foreach((array)$files as $directory => $files_temp):
 
 		// check if insert_image_statement has an error
 		$error_temp = execute_checkup($insert_image_statement->errorInfo(), "inserting image into database");		
-		if ($error_temp !== "success"):
-			if (file_exists("media/".$directory."/".$values['filename_thumb'])): unlink("media/".$directory."/".$values['filename_thumb']); endif;
-			if (file_exists("media/".$directory."/".$values['filename_large'])): unlink("media/".$directory."/".$values['filename_large']); endif;
-			if (file_exists("media/".$directory."/".$values['filename_full'])): unlink("media/".$directory."/".$values['filename_full']); endif;
-			continue; endif;
+//		if ($error_temp !== "success"):
+//			if (file_exists("media/".$directory."/".$values['filename_thumb'])): unlink("media/".$directory."/".$values['filename_thumb']); endif;
+//			if (file_exists("media/".$directory."/".$values['filename_large'])): unlink("media/".$directory."/".$values['filename_large']); endif;
+//			if (file_exists("media/".$directory."/".$values['filename_full'])): unlink("media/".$directory."/".$values['filename_full']); endif;
+//			continue; endif;
 
 		// if no errors so far then it means the images are okay and they were inserted okay, so delete original file
 		if (file_exists("originals/".$directory."/".$values['filename_original'])): unlink("originals/".$directory."/".$values['filename_original']); endif;
