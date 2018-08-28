@@ -51,6 +51,9 @@ foreach((array)$files as $directory => $files_temp):
 		$possible_duplicates = $check_image_statement->fetchAll();
 		foreach ($possible_duplicates as $row):
 			$file_name_new = $row['media_id']; 
+			unlink("media/".$directory."/".$file_name_new."_full.jpg");
+			unlink("media/".$directory."/".$file_name_new."_large.jpg");
+			unlink("media/".$directory."/".$file_name_new."_thumb.jpg");
 //			echo "skip $file_name<br>";
 //			echo "<img src='media/".$directory."/".$row['filename_thumb']."' alt='img' />";
 //			skip it for now .... will deal with duplicates later, needs interface to decide which ones to keep or to skip
