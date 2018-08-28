@@ -1,4 +1,7 @@
-<? // session_start();
+<? exit;
+
+
+// session_start();
 ob_start();
 mb_internal_encoding('UTF-8');
 mb_http_output('UTF-8');
