@@ -423,7 +423,7 @@ function body_process($body_incoming) {
 			if ($temp_array[1] == "input"):
 				if (!(empty($temp_array[2]))): $binding_string = "\n\n<span class='input-description'>".$temp_array[2]."</span>";
 				else: $binding_string = "<span class='input-description'>".$binding_name."</span>"; endif;
-				$binding_string .= "<input type='text' on='input-debounced:AMP.setState({ pageValues: { ".$binding_defaults[$binding_name]['key'].": event.value } })' value='".$binding_defaults[$binding_name]['random']."'>\n\n";			
+				$binding_string .= "<input type='text' on='change:AMP.setState({ pageValues: { ".$binding_defaults[$binding_name]['key'].": event.value } })' value='".$binding_defaults[$binding_name]['random']."'>\n\n";			
 			elseif ($temp_array[1] == "default"):
 				$binding_defaults[$binding_name]['default'] = $temp_array[2];
 				$binding_string = null;
