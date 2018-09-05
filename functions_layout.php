@@ -33,7 +33,8 @@ function html_header($title=null, $canonical=null) {
 
 	echo "<title>" . $title . "</title>";
 	echo '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
-
+	echo "<meta name='theme-color' content='".$color."'>';
+	
 	echo "<style>";
 	include_once('style.css');
 	include_once('style_nesty.css');
@@ -132,9 +133,12 @@ function amp_header($title=null, $canonical=null) {
 	
 	echo "<title>" . $title . "</title>";
 	echo '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
+	echo "<meta name='theme-color' content='".$color."'>';
 	
 //	echo "<base href='/' />";
 	echo "<meta name='viewport' content='width=device-width,minimum-scale=1,initial-scale=1'>"; // must define viewport for amp
+//	echo "<link rel='icon' sizes='192x192' href='icon.png'>";
+//	echo "<link rel='apple-touch-icon' href='icon.png'>";
 
 	echo "<style amp-custom>";
 	include_once('style.css');
