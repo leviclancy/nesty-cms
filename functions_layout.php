@@ -33,7 +33,7 @@ function html_header($title=null, $canonical=null) {
 
 	echo "<title>" . $title . "</title>";
 	echo '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
-	echo "<meta name='theme-color' content='".$color."'>';
+	echo "<meta name='theme-color' content='".$color."'>";
 	
 	echo "<style>";
 	include_once('style.css');
