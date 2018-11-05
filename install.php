@@ -4,16 +4,22 @@
 
 <? include_once('config.php');
 
+echo "test1";
+
 // make connection without database
 $connection_pdo = new PDO("mysql:host=$server;charset=utf8mb4", $username, $password);
 
 include_once('functions.php');
+
+echo "test2";
 
 // create database
 $sql_temp = "CREATE DATABASE IF NOT EXISTS $database CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;";
 $run_statement = $connection_pdo->prepare($sql_temp);
 $run_statement->execute();
 $result = execute_checkup($run_statement->errorInfo(), "creating database", "full");
+
+echo "test3";
 
 // make connection with database now that it certainly exists
 $connection_pdo = new PDO("mysql:host=$server;dbname=$database;charset=utf8mb4", $username, $password);
