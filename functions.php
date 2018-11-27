@@ -101,4 +101,26 @@ function code_generator ($authenticator_secret) {
 	$code_temp = $code_temp[1]; 
 	$code_temp = $code_temp & 0x7FFFFFFF; // only 32 bits
 	return str_pad($code_temp % 1000000, 6, '0', STR_PAD_LEFT); // make sure it is six characters
-	} ?>
+	}
+
+// this function generates an xhr
+function xhr_output ($result, $message, $redirect=null) {
+	
+	global $domain;
+	
+	header("Content-type: application/json");
+	header("Access-Control-Allow-Credentials: true");
+	header("Access-Control-Allow-Origin: https://".$domain);
+	header("AMP-Access-Control-Allow-Source-Origin: https://".$domain);
+	
+	if ($result == "success"): header("Access-Control-Expose-Headers: AMP-Access-Control-Allow-Source-Origin");
+	elseif ($result !== "success): header("HTTP/1.0 412 Precondition Failed", true, 412); endif;
+	
+	if ( ($outcome == "success") && !(empty($destination_url))):
+		header("AMP-Redirect-To: https://".$domain.$redirect);
+		header("Access-Control-Expose-Headers: AMP-Redirect-To, AMP-Access-Control-Allow-Source-Origin");
+		endif;
+	
+	echo json_encode(["result"=>$result, "message"=>$message]);
+	
+	exit; } ?>
