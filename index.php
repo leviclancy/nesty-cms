@@ -6,6 +6,7 @@ $connection_pdo = new PDO("mysql:host=$server;dbname=$database;charset=utf8mb4",
 
 include_once('functions.php');
 
+$page_temp = $slug_temp = $command_temp = null;
 $login = $page = $action = $page_confirmed = null;
 
 $publisher = $color = $description = null;
