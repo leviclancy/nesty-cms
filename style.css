@@ -35,10 +35,9 @@ h1, header h1 {
 #account-bar {
 	width: 100%;
 	font-family: Verdana, Arial;
-	position: absolute;
-	right: 0;
-	top: 20px;
-	font-size: 80%; }
+	position: relative;
+	font-size: 80%;
+	text-align: right; }
 
 #account-bar div {
 	position: inline;
@@ -48,10 +47,9 @@ h1, header h1 {
 #navigation-bar {
 	width: 100%;
 	font-family: Verdana, Arial;
-	position: absolute;
-	left: 0;
-	top: 20px;
+	position: relative;
 	font-size: 110%;
+	text-align: left;
 	}
 
 #navigation-bar div {
