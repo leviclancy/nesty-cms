@@ -1,7 +1,38 @@
-<? html_header($domain." media", $domain.$proper_uri);
+<? // if not logged in then give JSON error
+if (empty($login)):
+	// json result, not logged in
+	exit; endif;
 
-$media_description = null;
-if (!(empty($_POST['media_edit']))):
+// if invalid permissions then give JSON error
+if (!(in_array($login['status'], ["contributor", "admin"]))):
+	// json result, invalid permissions
+	exit; endif;
+
+// if deleting image then proceed...
+if (in_array($command_temp, ["xhr"]) && ($_POST['delete_image'] == $slug_temp)):
+
+	// delete from media table
+	$delete_statement = $connection_pdo->prepare("DELETE FROM $database.media WHERE media_id=:media_id");
+	$delete_statement->execute(["media_id"=>$_POST['delete_image']]);
+	$result = execute_checkup($delete_statement->errorInfo(), "deleting media");
+
+	// delete from paths table
+	$delete_statement = $connection_pdo->prepare("DELETE FROM $database.paths WHERE parent_id=:media_id or child_id=:media_id");
+	$delete_statement->execute(["media_id"=>$_POST['delete_image']]);
+	$result = execute_checkup($delete_statement->errorInfo(), "deleting paths with media");
+
+	unlink("media/".$media_confirmed[$slug_temp]['directory']."/".$slug_temp."_full.jpg");		
+	unlink("media/".$media_confirmed[$slug_temp]['directory']."/".$slug_temp."_large.jpg");		
+	unlink("media/".$media_confirmed[$slug_temp]['directory']."/".$slug_temp."_thumb.jpg");		
+
+	permanent_redirect("https://$domain");
+
+	exit; endif;
+
+// if editing image then proceed...
+if (in_array($command_temp, ["xhr"]) && ($_POST['edit_image'] == $slug_temp)):
+
+	// edit the image
 	$media_description = preg_replace("/\r\n/", "\n", $_POST['description']);
 	$media_description = trim($media_description);
 	if (ctype_space($media_description)): $media_description = null; endif;
@@ -38,7 +69,13 @@ if (!(empty($_POST['media_edit']))):
 	foreach(array_diff($_POST['parents_confirmed'], $_POST['parents']) as $parent_id):
 		$paths_delete_statement->execute(["parent_id"=>$parent_id, "child_id"=>$_POST['media_id']]);
 		execute_checkup($paths_delete_statement->errorInfo(), "removing from gallery of $parent_id"); endforeach;
-	endif;
+
+	// json output the response
+
+	exit; endif;
+
+
+amp_header($domain." media", $domain.$proper_uri);
 
 $retrieve_media->execute(["media_id"=>$slug_temp]);
 $result = $retrieve_media->fetchAll();
@@ -60,7 +97,6 @@ $retrieve_pages->execute(["media_id"=>$slug_temp]);
 $result = $retrieve_pages->fetchAll();
 foreach ($result as $row):
 	$media_confirmed[$slug_temp]['parents'][] = $row['parent_id']; endforeach;
-
 
 echo "<div id='edit-window'>";
 echo "<div id='edit-window-create-button' class='background_1'><a href='/create/' target='_blank'><i class='material-icons'>note_add</i> Create</a></div>";
