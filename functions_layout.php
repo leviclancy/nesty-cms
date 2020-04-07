@@ -94,19 +94,7 @@ function amp_header($title=null, $canonical=null) {
 		echo '</script></amp-analytics>';
 		endif;
 
-	echo "<div id='navigation-bar'>";
-		echo "<div id='navigation-bar-home-button'><a href='/'>".$publisher."</a></div>";
-		echo "<div id='navigation-bar-sitemap-button'><a href='/sitemap/'>Sitemap</a></div>";
-		echo "<div id='navigation-bar-archive-button'><a href='/schedule/'>Archive</a></div>";
-		echo "<div id='navigation-bar-search-button'>Search</div>";
-		echo "</div>";
-
-	// AMP LIGHTBOX FOR SEARCH
-	echo "<form method='get' action='/search/' target='_top'>";
-	echo "<input id='navigation-search-input' type='search' name='term' placeholder='Search' value='".$search_value."' maxlength='45' autocomplete='off' required>";	
-	echo "</form>";
-	
-	if (empty($login)):
+		if (empty($login)):
 	
 		endif;
 	
@@ -159,6 +147,18 @@ function amp_header($title=null, $canonical=null) {
 		echo "<a href='/'><div id='login-window-home-button'>Exit</div></a>";
 	
 		echo "</amp-lightbox>";
+	
+	echo "<div id='navigation-bar'>";
+		echo "<div id='navigation-bar-home-button'><a href='/'>".$publisher."</a></div>";
+		echo "<div id='navigation-bar-sitemap-button'><a href='/sitemap/'>Sitemap</a></div>";
+		echo "<div id='navigation-bar-archive-button'><a href='/schedule/'>Archive</a></div>";
+		echo "<div id='navigation-bar-search-button'>Search</div>";
+		echo "</div>";
+
+	// AMP LIGHTBOX FOR SEARCH
+	echo "<form method='get' action='/search/' target='_top'>";
+	echo "<input id='navigation-search-input' type='search' name='term' placeholder='Search' value='".$search_value."' maxlength='45' autocomplete='off' required>";	
+	echo "</form>";
 	
 	}
 
