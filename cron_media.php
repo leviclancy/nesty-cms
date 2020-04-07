@@ -39,6 +39,11 @@ foreach((array)$files as $directory => $files_temp):
 
 		$photo_location = $photo = null;
 
+		echo $file_name."<br><br>";
+
+		print_r($file_info);
+		exit;
+
 		$file_name_new = time($file_info['DateTime'])."_".random_code(10);
 		$values = [
 			"media_id"	=>	$file_name_new,
