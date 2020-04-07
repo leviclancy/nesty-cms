@@ -118,7 +118,7 @@ function amp_header($title=null, $canonical=null) {
 
 		echo "</div>";
 
-	echo "<amp-lightbox class='login'>";
+	echo "<amp-lightbox class='login' layout='nodisplay'>>";
 	
 		echo "<form id='login-form' method='post' action=''>";
 		foreach ((array)$_POST as $name_temp => $value_temp):
