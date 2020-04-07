@@ -99,10 +99,10 @@ function amp_header($title=null, $canonical=null) {
 		endif;
 	
 	echo "<div id='account-bar'>";
-		echo "<div id='account-bar-signin-button'><a href='/account/'><i class='material-icons'>account_box</i> Sign in</a></div>";
-		echo "<div id='account-bar-signout-button'><a href='/account/'><i class='material-icons'>close</i> Sign out</a></div>";
-		echo "<div id='account-bar-account-button'><a href='/account/'><i class='material-icons'>close</i> Sign out</a></div>";
+		echo "<div id='account-bar-signin-button'><a href='/account/'><i class='material-icons'>account_box</i> Log in</a></div>";
 
+		echo "<div id='account-bar-signout-button'><a href='/create/'><i class='material-icons'>add</i> Create</a></div>";
+		
 		global $page_confirmed;
 		if (!(empty($login)) && in_array($login['status'], ["contributor", "admin"]) && !(empty($page_confirmed[$page_temp]['page_id']))):
 			echo "<div id='account-bar-edit-button'><a href='/".$page_temp."/edit/'>edit</a></div>";
@@ -112,7 +112,10 @@ function amp_header($title=null, $canonical=null) {
 		if (!(empty($login)) && in_array($login['status'], ["contributor", "admin"]) && !(empty($media_confirmed[$slug_temp]['media_id']))):
 			echo "<div id='account-bar-edit-button'><a href='/m/".$slug_temp."/edit/'>edit</a></div>";
 			endif;
-	
+
+		echo "<div id='account-bar-signout-button'><a href='/logout/'><i class='material-icons'>close</i> Log out</a></div>";
+		echo "<div id='account-bar-account-button'><a href='/create/'><i class='material-icons'>account_box</i> Settings</a></div>";
+
 		echo "</div>";
 
 	echo "<amp-lightbox class='login'>";
