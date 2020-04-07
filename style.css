@@ -41,7 +41,8 @@ h1, header h1 {
 	text-align: right; }
 
 #account-bar div {
-	position: inline;
+	position: relative;
+	display: inline-block
 	margin: 0 20px;
 	}
 
@@ -55,7 +56,8 @@ h1, header h1 {
 	}
 
 #navigation-bar div {
-	position: inline;
+	position: relative;
+	display: inline-block
 	margin: 0 20px;
 	}
 
