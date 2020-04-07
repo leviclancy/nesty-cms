@@ -98,23 +98,24 @@ function amp_header($title=null, $canonical=null) {
 	
 		endif;
 	
+	global $page_confirmed;
+	global $media_confirmed;
+
 	echo "<div id='account-bar'>";
-		echo "<div id='account-bar-signin-button'><a href='/account/'><i class='material-icons'>account_box</i> Log in</a></div>";
+		echo "<div id='account-bar-signin-button'><a href='/account/'><i class='material-icons'>account_circle</i> Log in</a></div>";
 
 		echo "<div id='account-bar-signout-button'><a href='/create/'><i class='material-icons'>add</i> Create</a></div>";
 		
-		global $page_confirmed;
 		if (!(empty($login)) && in_array($login['status'], ["contributor", "admin"]) && !(empty($page_confirmed[$page_temp]['page_id']))):
-			echo "<div id='account-bar-edit-button'><a href='/".$page_temp."/edit/'>edit</a></div>";
+			echo "<div id='account-bar-edit-button'><a href='/".$page_temp."/edit/'><i class='material-icons'>edit</i> Edit</a></div>";
 			endif;
 	
-		global $media_confirmed;
 		if (!(empty($login)) && in_array($login['status'], ["contributor", "admin"]) && !(empty($media_confirmed[$slug_temp]['media_id']))):
-			echo "<div id='account-bar-edit-button'><a href='/m/".$slug_temp."/edit/'>edit</a></div>";
+			echo "<div id='account-bar-edit-button'><a href='/m/".$slug_temp."/edit/'><i class='material-icons'>edit</i> Edit</a></div>";
 			endif;
 
-		echo "<div id='account-bar-signout-button'><a href='/logout/'><i class='material-icons'>close</i> Log out</a></div>";
-		echo "<div id='account-bar-account-button'><a href='/create/'><i class='material-icons'>account_box</i> Settings</a></div>";
+		echo "<div id='account-bar-signout-button'><a href='/logout/'><i class='material-icons'>cancel</i> Log out</a></div>";
+		echo "<div id='account-bar-account-button'><a href='/create/'><i class='material-icons'>settings</i> Settings</a></div>";
 
 		echo "</div>";
 
@@ -153,15 +154,17 @@ function amp_header($title=null, $canonical=null) {
 	
 	echo "<div id='navigation-bar'>";
 		echo "<div id='navigation-bar-home-button'><a href='/'>".$publisher."</a></div>";
-		echo "<div id='navigation-bar-sitemap-button'><a href='/sitemap/'>Sitemap</a></div>";
-		echo "<div id='navigation-bar-archive-button'><a href='/schedule/'>Archive</a></div>";
-		echo "<div id='navigation-bar-search-button'>Search</div>";
+		echo "<div id='navigation-bar-sitemap-button'><a href='/sitemap/'><i class='material-icons'>vertical_split</i> Sitemap</a></div>";
+		echo "<div id='navigation-bar-archive-button'><a href='/schedule/'><i class='material-icons'>event</i> Archive</a></div>";
+		echo "<div id='navigation-bar-search-button'><i class='material-icons'>search</i> Search</div>";
 		echo "</div>";
 
 	// AMP LIGHTBOX FOR SEARCH
-	echo "<form method='get' action='/search/' target='_top'>";
-	echo "<input id='navigation-search-input' type='search' name='term' placeholder='Search' value='".$search_value."' maxlength='45' autocomplete='off' required>";	
-	echo "</form>";
+	echo "<amp-lightbox class='login' layout='nodisplay'>>";
+		echo "<form method='get' action='/search/' target='_top'>";
+		echo "<input id='navigation-search-input' type='search' name='term' placeholder='Search' value='".$search_value."' maxlength='45' autocomplete='off' required>";	
+		echo "</form>";
+		echo "</amp-lightbox>";
 	
 	}
 
