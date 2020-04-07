@@ -19,7 +19,7 @@ $result = execute_checkup($run_statement->errorInfo(), "creating database", "ful
 $connection_pdo = new PDO("mysql:host=$server;dbname=$database;charset=utf8mb4", $username, $password);
 
 // create users table
-$table_temp = [
+$sql_columns_temp = [
 	"`user_id` VARCHAR(100)",
 	"`status` VARCHAR(100)",
 	"`email` VARCHAR(100)",
@@ -33,24 +33,7 @@ $table_temp = [
 	"`hash` VARCHAR(400)",
 	"`authenticator` VARCHAR(100)",
 	"`cookie` VARCHAR(100)" ];
-
-// temp
-// temp
-// temp
-$sql_temp = "ALTER TABLE $database.users ADD COLUMN `reset_code` VARCHAR(400) AFTER `cookie_time`;";
-$run_statement = $connection_pdo->prepare($sql_temp);
-$run_statement->execute();
-$result = execute_checkup($run_statement->errorInfo(), "creating reset_code column", "full");
-
-// temp
-// temp
-// temp
-$sql_temp = "ALTER TABLE $database.users ADD COLUMN `reset_time` VARCHAR(50) AFTER `reset_code`;";
-$run_statement = $connection_pdo->prepare($sql_temp);
-$run_statement->execute();
-$result = execute_checkup($run_statement->errorInfo(), "creating reset_time column", "full");
-
-$sql_temp = "CREATE TABLE IF NOT EXISTS $database.users (".implode(', ', $table_temp).",  timestamp TIMESTAMP, PRIMARY KEY (`user_id`)) DEFAULT CHARSET=utf8mb4;";
+$sql_temp = "CREATE TABLE IF NOT EXISTS $database.users (".implode(', ', $sql_columns_temp).",  timestamp TIMESTAMP, PRIMARY KEY (`user_id`)) DEFAULT CHARSET=utf8mb4;";
 $run_statement = $connection_pdo->prepare($sql_temp);
 $run_statement->execute();
 $result = execute_checkup($run_statement->errorInfo(), "creating users table", "full");
@@ -75,31 +58,83 @@ if (!(empty($_POST['submit']))):
 	endif;
                  
 // create media table
-$sql_temp = "CREATE TABLE IF NOT EXISTS $database.media (`media_id` VARCHAR(100), `directory` VARCHAR(100), `filename_original` VARCHAR(200),`filename_full` VARCHAR(200), `filename_large` VARCHAR(200), `filename_thumb` VARCHAR(200), `datetime_original` DATETIME, `datetime_file` DATETIME, `datetime_process` DATETIME, `model` VARCHAR(100), `exposure` VARCHAR(100), `fnumber` VARCHAR(100), `iso` VARCHAR(100), `focallength` VARCHAR(100), `description` TEXT, timestamp TIMESTAMP, PRIMARY KEY (`media_id`)) DEFAULT CHARSET=utf8mb4;";
+$sql_columns_temp = [
+	"`media_id` VARCHAR(100)",
+	"`directory` VARCHAR(100)",
+	"`filename_original` VARCHAR(200)",
+	"`filename_full` VARCHAR(200)",
+	"`filename_large` VARCHAR(200)",
+	"`filename_thumb` VARCHAR(200)",
+	"`datetime_original` DATETIME",
+	"`datetime_file` DATETIME",
+	"`datetime_process` DATETIME",
+	"`model` VARCHAR(100)",
+	"`exposure` VARCHAR(100)",
+	"`fnumber` VARCHAR(100)",
+	"`iso` VARCHAR(100)",
+	"`focallength` VARCHAR(100)",
+	"`description` TEXT",
+	"timestamp TIMESTAMP",
+	];
+$sql_temp = "CREATE TABLE IF NOT EXISTS $database.media (".implode(", ", $sql_columns_temp).", PRIMARY KEY (`media_id`)) DEFAULT CHARSET=utf8mb4;";
 $run_statement = $connection_pdo->prepare($sql_temp);
 $run_statement->execute();
 $result = execute_checkup($run_statement->errorInfo(), "creating media table", "full");
 
 // create pages table
-$sql_temp = "CREATE TABLE IF NOT EXISTS $database.pages (`page_id` VARCHAR(100), `header` VARCHAR(200), `slug` VARCHAR(200), `cover` VARCHAR(200), `password` VARCHAR(100), `body` LONGTEXT, `created_time` DATE, `updated_time` DATE, `popover` TEXT, timestamp TIMESTAMP, PRIMARY KEY (`page_id`)) DEFAULT CHARSET=utf8mb4;";
+$sql_columns_temp = [
+	"`page_id` VARCHAR(100)",
+	"`header` VARCHAR(200)",
+	"`slug` VARCHAR(200)",
+	"`cover` VARCHAR(200)",
+	"`password` VARCHAR(100)",
+	"`body` LONGTEXT",
+	"`created_time` DATE",
+	"`updated_time` DATE",
+	"`popover` TEXT",
+	"timestamp TIMESTAMP",
+	];
+$sql_temp = "CREATE TABLE IF NOT EXISTS $database.pages (".implode(", ", $sql_columns_temp).", PRIMARY KEY (`page_id`)) DEFAULT CHARSET=utf8mb4;";
 $run_statement = $connection_pdo->prepare($sql_temp);
 $run_statement->execute();
 $result = execute_checkup($run_statement->errorInfo(), "creating pages table", "full");
 
 // create snippets table
-$sql_temp = "CREATE TABLE IF NOT EXISTS $database.snippets (`snippet_id` VARCHAR(100), `name` VARCHAR(100), `body` LONGTEXT, `created_time` DATE, `updated_time` DATE, `year` INT4, `month` INT4, `day` INT4, timestamp TIMESTAMP, PRIMARY KEY (`snippet_id`)) DEFAULT CHARSET=utf8mb4;";
+$sql_columns_temp = [
+	"`snippet_id` VARCHAR(100)",
+	"`name` VARCHAR(100)",
+	"`body` LONGTEXT",
+	"`created_time` DATE",
+	"`updated_time` DATE",
+	"`year` INT4",
+	"`month` INT4",
+	"`day` INT4",
+	"timestamp TIMESTAMP",
+	];
+$sql_temp = "CREATE TABLE IF NOT EXISTS $database.snippets (".implode(", ", $sql_columns_temp).", PRIMARY KEY (`snippet_id`)) DEFAULT CHARSET=utf8mb4;";
 $run_statement = $connection_pdo->prepare($sql_temp);
 $run_statement->execute();
 $result = execute_checkup($run_statement->errorInfo(), "creating snippets table", "full");
 
 // create paths table
-$sql_temp = "CREATE TABLE IF NOT EXISTS $database.paths (`path_id` VARCHAR(100), `parent_id` VARCHAR(100), `child_id` VARCHAR(100), timestamp TIMESTAMP, PRIMARY KEY (`path_id`)) DEFAULT CHARSET=utf8mb4;";
+$sql_columns_temp = [
+	"`path_id` VARCHAR(100)",
+	"`parent_id` VARCHAR(100)",
+	"`child_id` VARCHAR(100)",
+	"timestamp TIMESTAMP",
+	];
+$sql_temp = "CREATE TABLE IF NOT EXISTS $database.paths (".implode(", ", $sql_columns_temp).", PRIMARY KEY (`path_id`)) DEFAULT CHARSET=utf8mb4;";
 $run_statement = $connection_pdo->prepare($sql_temp);
 $run_statement->execute();
 $result = execute_checkup($run_statement->errorInfo(), "creating paths table", "full");
 			
 // create site info table
-$sql_temp = "CREATE TABLE IF NOT EXISTS $database.siteinfo (`key` VARCHAR(100), `value` VARCHAR(900), timestamp TIMESTAMP, PRIMARY KEY (`key`)) DEFAULT CHARSET=utf8mb4;";
+$sql_columns_temp = [
+	"`key` VARCHAR(100)",
+	"`value` VARCHAR(900)",
+	"timestamp TIMESTAMP",
+	];	
+$sql_temp = "CREATE TABLE IF NOT EXISTS $database.siteinfo (".implode(", ", $sql_columns_temp).", PRIMARY KEY (`key`)) DEFAULT CHARSET=utf8mb4;";
 $run_statement = $connection_pdo->prepare($sql_temp);
 $run_statement->execute();
 $result = execute_checkup($run_statement->errorInfo(), "creating siteinfo table", "full");
