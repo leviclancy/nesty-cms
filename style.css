@@ -36,6 +36,7 @@ h1, header h1 {
 	width: 100%;
 	font-family: Verdana, Arial;
 	position: relative;
+	display: block;
 	font-size: 80%;
 	text-align: right; }
 
@@ -48,6 +49,7 @@ h1, header h1 {
 	width: 100%;
 	font-family: Verdana, Arial;
 	position: relative;
+	display: block;
 	font-size: 110%;
 	text-align: left;
 	}
