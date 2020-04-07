@@ -114,7 +114,7 @@ function xhr_output ($result, $message, $redirect=null) {
 	header("AMP-Access-Control-Allow-Source-Origin: https://".$domain);
 	
 	if ($result == "success"): header("Access-Control-Expose-Headers: AMP-Access-Control-Allow-Source-Origin");
-	elseif ($result !== "success): header("HTTP/1.0 412 Precondition Failed", true, 412); endif;
+	elseif ($result !== "success"): header("HTTP/1.0 412 Precondition Failed", true, 412); endif;
 	
 	if ( ($outcome == "success") && !(empty($destination_url))):
 		header("AMP-Redirect-To: https://".$domain.$redirect);
