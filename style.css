@@ -30,94 +30,34 @@ h1, header h1 {
 
 
 
-/* NAVIGATION CAROUSEL AND HEADER */
+/* ACCOUNT AND NAVIGATION BAR */
 
-#navigation-carousel .amp-carousel-button {
-	display: none; }
-
-#navigation-carousel-main, #navigation-carousel-search {
+#account-bar {
 	width: 100%;
 	font-family: Verdana, Arial;
-	position: relative; }
-
-#navigation-carousel-main div, #navigation-carousel-main button, #navigation-carousel-main a {
-	color: rgba(50,50,50,0.8); }
-
-#navigation-carousel-search div, #navigation-carousel-search button, #navigation-carousel-search a {
-	color: rgba(255,255,255,0.95); }
-
-#navigation-carousel .material-icons, #navigation-carousel a .material-icons {
-	vertical-align: middle;
-	display: inline-block;
-	padding-bottom: 3px; }
-
-#navigation-carousel-main div, #navigation-carousel-search div {
 	position: absolute;
-	font-size: 15px;
-	line-height: 16px;
-	padding: 7px 20px; }
-
-div#navigation-signin-button {
-	text-align: left;
+	right: 0;
 	top: 20px;
-	left: 0; }
+	font-size: 80%; }
 
-div#navigation-create-button {
-	text-align: left;
-	font-size: 14px;
-	line-height: 15px;
-	text-transform: uppercase;
-	border-radius: 4px;
-	padding: 7px 20px 5px 15px;
-	top: 20px;
-	left: 23px; }
-
-div#navigation-create-button, div#navigation-create-button a {
-	color: #fff; }
-
-div#navigation-settings-button {
-	top: 70px;
-	left: 3px; }
-
-div#navigation-settings-button span {
-	padding-left: 4px;
-	color: rgba(50,50,50,0.6);
-	font-size: 12px; }
-	
-div#navigation-home-button {
-	text-align: right;
-	top: 25px;
-	right: 140px; }
-
-@media only screen and (max-width: 500px)  {
-	div#navigation-home-button { top: 70px; right: 7px; }
+#account-bar div {
+	position: inline;
+	margin: 0 20px;
 	}
-	
-div#navigation-search-button {
-	text-align: right;
+
+#navigation-bar {
+	width: 100%;
+	font-family: Verdana, Arial;
+	position: absolute;
+	left: 0;
 	top: 20px;
-	right: 25px;
-	padding: 12px 20px 10px;
-	font-size: 14px;
-	line-height: 15px;
-	text-transform: uppercase;
-	border: 1px solid <? echo $color ?>;
-	border-radius: 4px; }
+	font-size: 110%;
+	}
 
-div#navigation-search-button, div#navigation-search-button a {
-	color: <? echo $color ?>; }	
-
-div#navigation-back-button {
-	background: none;
-	text-align: left;
-	top: 10px;
-	left: -3px; }
-
-div#navigation-sitemap-button {
-	background: none;
-	text-align: right;
-	top: 15px;
-	right: 10px; }
+#navigation-bar div {
+	position: inline;
+	margin: 0 20px;
+	}
 
 #navigation-search-input {
 	display: block;
