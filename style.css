@@ -42,7 +42,7 @@ h1, header h1 {
 
 #account-bar div {
 	position: relative;
-	display: inline-block
+	display: inline-block;
 	margin: 0 20px;
 	}
 
@@ -57,7 +57,7 @@ h1, header h1 {
 
 #navigation-bar div {
 	position: relative;
-	display: inline-block
+	display: inline-block;
 	margin: 0 20px;
 	}
 
