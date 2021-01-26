@@ -63,6 +63,11 @@ function amp_header($title=null, $canonical=null) {
 //		echo '<script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>';
 //		endif;
 	
+	// for the date picker ..
+	if (!(empty($page_temp)) && ($command_temp == "edit")):
+		echo '<script async custom-element="amp-date-picker" src="https://cdn.ampproject.org/v0/amp-date-picker-0.1.js"></script>';
+		endif;
+	
 	echo "<title>" . $title . "</title>";
 	echo '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
 	echo "<meta name='theme-color' content='".$color."'>";
