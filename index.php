@@ -159,7 +159,8 @@ foreach ($connection_pdo->query("SELECT * FROM $database.users ORDER BY status A
 if (in_array($page_temp, ["account", "security", "website", "users", "new", "add"]) && empty($login)):
 	setcookie("cookie_code", null, time()-8000, '/');
 	if ($_SERVER['REQUEST_URI'] !== "/account/"): permanent_redirect("https://".$domain."/account/"); endif;
-	login(); endif;
+//	login(); endif;
+	endif;
 
 if (($page_temp == "account") && !(empty($login))):
 	include_once('admin_account.php'); endif;
