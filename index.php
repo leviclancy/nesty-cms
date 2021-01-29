@@ -113,6 +113,8 @@ foreach ($connection_pdo->query("SELECT * FROM $database.users ORDER BY status A
 
 print_r($row);
 
+exit;
+
 	if ($row['status'] == "admin"): $admin_count++; endif;
 
 	if (!(in_array($row['status'], ["admin", "contributor"]))): continue; endif;
