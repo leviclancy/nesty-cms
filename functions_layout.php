@@ -108,7 +108,7 @@ function amp_header($title=null, $canonical=null) {
 	global $media_confirmed;
 
 	echo "<div id='account-bar'>";
-		echo "<div id='account-bar-signin-button'><a href='/account/'><i class='material-icons'>account_circle</i> Log in</a></div>";
+		echo "<div id='account-bar-signin-button' role='button' tabindex='0' on='tap:login-lightbox.open'><i class='material-icons'>account_circle</i> Log in</div>";
 
 		echo "<div id='account-bar-signout-button'><a href='/create/'><i class='material-icons'>add</i> Create</a></div>";
 		
@@ -125,7 +125,7 @@ function amp_header($title=null, $canonical=null) {
 
 		echo "</div>";
 
-	echo "<amp-lightbox class='login' layout='nodisplay'>>";
+	echo "<amp-lightbox id='login-lightbox' class='login' layout='nodisplay'>>";
 	
 		echo "<form id='login-form' method='post' action=''>";
 		foreach ((array)$_POST as $name_temp => $value_temp):
