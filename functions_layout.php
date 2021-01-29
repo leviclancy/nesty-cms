@@ -127,7 +127,7 @@ function amp_header($title=null, $canonical=null) {
 
 	echo "<amp-lightbox id='login-lightbox' class='login' layout='nodisplay'>>";
 	
-		echo "<form id='login-form' method='post' action=''>";
+		echo "<form id='login-form' method='post' action-xhr='https://".$domain."' target='_top'>";
 		foreach ((array)$_POST as $name_temp => $value_temp):
 			if (is_array($value_temp)):
 				foreach ($value_temp as $name_temp_temp => $value_temp_temp): echo "<input type='hidden' name='".$name_temp_temp."[]' value='$value_temp_temp'>"; endforeach;
