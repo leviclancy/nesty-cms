@@ -104,11 +104,14 @@ if ( ($page_temp == "account") && !(empty($_REQUEST['reset']))):
 // if there is a cookie then double-check it
 $users_list = []; $admin_count = 0;
 foreach ($connection_pdo->query("SELECT * FROM $database.users ORDER BY status ASC, email ASC") as $row):
+
 	$users_list[$row['user_id']] = [
 		"user_id" => $row['user_id'],
 		"email" => $row['email'],
 		"name" => $row['name'],
 		"status" => $row['status'] ];
+
+print_r($row);
 
 	if ($row['status'] == "admin"): $admin_count++; endif;
 
