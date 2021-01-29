@@ -9,8 +9,10 @@ include_once('functions.php');
 $page_temp = $slug_temp = $command_temp = null;
 $login = $page = $action = $page_confirmed = null;
 
-if (isset($redirect_array[$page_temp])): 
-	permanent_redirect($redirect_array[$page_temp]);
+if (isset($redirect_array[$page_temp])):
+	if (!(empty($page_temp))):
+		permanent_redirect($redirect_array[$page_temp]);
+		endif;
 	endif;
 
 $publisher = $color = $description = null;
