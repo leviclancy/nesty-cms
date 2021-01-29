@@ -1,5 +1,5 @@
-<? if ($page_temp == "new"): html_header("new", "+ page");
-else: html_header($page_confirmed['header'], $domain."/edit/"); endif;
+<? if ($page_temp == "new"): amp_header("new", "+ page");
+else: amp_header($page_confirmed['header'], $domain."/edit/"); endif;
 
 
 if (isset($_POST['page_edit'])):
