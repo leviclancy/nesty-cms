@@ -9,6 +9,10 @@ include_once('functions.php');
 $page_temp = $slug_temp = $command_temp = null;
 $login = $page = $action = $page_confirmed = null;
 
+if (isset($redirect_array[$page_temp])): 
+	permanent_redirect($redirect_array[$page_temp]);
+	endif;
+
 $publisher = $color = $description = null;
 $recaptcha_site = $recaptcha_private = $google_analytics_code = $google_authenticator_code = null;
 foreach ($connection_pdo->query("SELECT * FROM $database.siteinfo") as $row):	
