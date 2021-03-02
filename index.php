@@ -299,7 +299,8 @@ if (!(empty($page_confirmed[$page_temp]))):
 		permanent_redirect("https://$domain/".$page_temp."/edit/"); 
 		endif;
 
-	if (($slug_temp == "edit") && in_array($login['status'], ["contributor", "admin"]) && !(empty($login))):
+//	if (($slug_temp == "edit") && in_array($login['status'], ["contributor", "admin"]) && !(empty($login))):
+	if ($slug_temp == "edit"):
 		include_once('admin_page.php');
 		endif;
 
